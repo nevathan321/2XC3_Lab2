@@ -1,5 +1,5 @@
 from collections import deque
-
+import random
 #Undirected graph using an adjacency list
 class Graph:
 
@@ -76,6 +76,22 @@ def BFS2(G, node1, node2):
 
     return []
 
+def BFS3(G, start):
+    Q = deque([start])
+    visited = set([start])
+    pred = {}  # child -> parent (predecessor)
+
+    while Q:
+        u = Q.popleft()
+        for v in G.adj[u]:
+            if v not in visited:
+                visited.add(v)
+                pred[v] = u
+                Q.append(v)
+
+    return pred
+
+
 #Depth First Search
 def DFS(G, node1, node2):
     S = [node1]
@@ -91,6 +107,108 @@ def DFS(G, node1, node2):
                     return True
                 S.append(node)
     return False
+
+def DFS2(G, node1, node2):
+    # Return a path from node1 to node2 using DFS; [] if none.
+    if node1 == node2:
+        return [node1]
+
+    stack = [node1]
+    visited = set([node1])
+    pred = {}  # predecessor map: child -> parent
+
+    while stack:
+        current = stack.pop()
+
+        if current == node2:
+            # reconstruct
+            path = [node2]
+            while path[-1] != node1:
+                path.append(pred[path[-1]])
+            path.reverse()
+            return path
+
+        for nbr in G.adj[current]:
+            if nbr not in visited:
+                visited.add(nbr)
+                pred[nbr] = current
+                stack.append(nbr)
+
+    return []
+
+
+def DFS3(G, start):
+    stack = [start]
+    visited = set([start])
+    pred = {}  # child -> parent (predecessor)
+
+    while stack:
+        u = stack.pop()
+        for v in G.adj[u]:
+            if v not in visited:
+                visited.add(v)
+                pred[v] = u
+                stack.append(v)
+
+    return pred
+
+def has_cycle(G):
+    visited = set()
+
+    def dfs(u, parent):
+        visited.add(u)
+        for v in G.adj[u]:
+            if v not in visited:
+                if dfs(v, u):
+                    return True
+            elif v != parent:
+                # visited neighbor that isn't the node we came from => cycle
+                return True
+        return False
+
+    # graph might be disconnected, so check each component
+    for node in G.adj:
+        if node not in visited:
+            if dfs(node, None):
+                return True
+
+    return False
+
+def is_connected(G):
+    # An undirected graph is connected if every node is reachable from any start node.
+    if len(G.adj) == 0:
+        return True
+
+    start = next(iter(G.adj))  # grab any node key
+    Q = deque([start])
+    visited = set([start])
+
+    while Q:
+        u = Q.popleft()
+        for v in G.adj[u]:
+            if v not in visited:
+                visited.add(v)
+                Q.append(v)
+
+    return len(visited) == len(G.adj)
+
+def create_random_graph(i, j):
+    G = Graph(i)
+    max_edges = i * (i - 1) // 2
+    j = min(j, max_edges)
+
+    edges = set()
+    while len(edges) < j:
+        u = random.randrange(i)
+        v = random.randrange(i)
+        if u == v:
+            continue
+        a, b = (u, v) if u < v else (v, u)
+        if (a, b) in edges:
+            continue
+        edges.add((a, b))
+        G.add_edge(a, b)
+    return G
 
 #Use the methods below to determine minimum vertex covers
 
