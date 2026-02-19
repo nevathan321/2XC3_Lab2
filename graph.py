@@ -241,6 +241,23 @@ def MVC(G):
                 min_cover = subset
     return min_cover
 
+def is_independent_set(G, S):
+    for node in S:
+        for neighbor in G.adj[node]:
+            if neighbor in S:
+                return False
+    return True
+
+def MIS(G):
+    nodes = [i for i in range(G.get_size())]
+    subsets = power_set(nodes)
+    max_set = []
+    for subset in subsets:
+        if is_independent_set(G, subset):
+            if len(subset) > len(max_set):
+                max_set = subset
+    return max_set
+
 
 if __name__ == "__main__":
     G = Graph(3)
