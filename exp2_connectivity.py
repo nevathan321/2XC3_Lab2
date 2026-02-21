@@ -1,15 +1,3 @@
-"""
-Experiment 2: Connectivity Probability vs Number of Edges
-COMPSCI 2XC3 - Lab 2
-
-Question: With i nodes and j edges, what is the probability a random graph is connected?
-
-Setup:
-  - Fixed nodes: 100
-  - Edge range: 0 to 500, step 25
-  - Runs per edge count: 100
-"""
-
 import time
 import functools
 import matplotlib.pyplot as plt
