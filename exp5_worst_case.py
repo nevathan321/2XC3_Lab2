@@ -40,8 +40,8 @@ def plot_results(ratios, n):
     plt.legend()
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
-    plt.savefig('exp5_worst_case.png', dpi=150)
-    print("Plot saved to exp5_worst_case.png")
+    plt.savefig('images/exp5_worst_case.png', dpi=150)
+    print("Plot saved to images/exp5_worst_case.png")
 
 def print_latex_summary(ratios, worst_ratio):
     print("\n" + "="*60)

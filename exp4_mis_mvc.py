@@ -62,8 +62,8 @@ def plot_results(edge_counts, mvc_sizes, mis_sizes, sums, n_nodes):
     
     plt.tight_layout()
     
-    plt.savefig('Images\exp4_mis_mvc_relationship.png', dpi=150)
-    print("\n Plot saved to Images\exp4_mis_mvc_relationship.png")
+    plt.savefig('images/exp4_mis_mvc_relationship.png', dpi=150)
+    print("\nPlot saved to images/exp4_mis_mvc_relationship.png")
 
 
 def print_results_table(edge_counts, mvc_sizes, mis_sizes, sums, n_nodes):
