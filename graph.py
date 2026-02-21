@@ -259,6 +259,61 @@ def MIS(G):
     return max_set
 
 
+# Greedy algorithm
+def approx1(G):
+    C = set()
+    edges = set()
+    for u in G.adj:
+        for v in G.adj[u]:
+            if u < v:
+                edges.add((u, v))
+    
+    while edges:
+        degree = {}
+        for (u, v) in edges:
+            degree[u] = degree.get(u, 0) + 1
+            degree[v] = degree.get(v, 0) + 1
+        
+        max_vertex = max(degree, key=degree.get)
+        C.add(max_vertex)
+        
+        edges = {(u, v) for (u, v) in edges if u != max_vertex and v != max_vertex}
+    
+    return C
+
+# Bad random algorithm
+def approx2(G):
+    C = set()
+    nodes = list(G.adj.keys())
+    random.shuffle(nodes)
+    
+    for v in nodes:
+        C.add(v)
+        if is_vertex_cover(G, C):
+            return C
+    
+    return C
+
+
+# Much better random algorithm :)
+def approx3(G):
+    C = set()
+    edges = []
+    for u in G.adj:
+        for v in G.adj[u]:
+            if u < v:
+                edges.append((u, v))
+    
+    while edges:
+        (u, v) = random.choice(edges)
+        C.add(u)
+        C.add(v)
+        
+        edges = [(a, b) for (a, b) in edges if a != u and a != v and b != u and b != v]
+    
+    return C
+
+
 if __name__ == "__main__":
     G = Graph(3)
     print(G.number_of_nodes())  # 3
