@@ -58,7 +58,7 @@ def plot_single_curve(edge_values, probabilities, num_nodes, num_runs):
     plt.ylim(-0.05, 1.05)
     plt.grid(True, linestyle='--', alpha=0.6)
     plt.tight_layout()
-    plt.savefig("exp2_connectivity_probability.png", dpi=150)
+    plt.savefig("Images\exp2_connectivity_probability.png", dpi=150)
     plt.show()
 
 

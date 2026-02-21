@@ -92,8 +92,8 @@ def plot_results(edge_counts, ratios, n_nodes):
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
     
-    plt.savefig('exp3_approx_comparison.png', dpi=150)
-    print("\nPlot saved to exp3_approx_comparison.png")
+    plt.savefig('Images\exp3_approx_comparison.png', dpi=150)
+    print("\nPlot saved to Images\exp3_approx_comparison.png")
 
 
 def plot_node_results(node_results):
